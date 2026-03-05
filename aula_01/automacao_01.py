@@ -1,6 +1,10 @@
 import pandas as pd
 import pyautogui as pag
-import time 
+import time
+
+# Esse código fuciona corretamente apenas nas minhas configurações de tela.
+
+# Carregar tabela
 tabela = pd.read_csv("produtos.csv")
 tabela.head()
 
@@ -26,9 +30,8 @@ pag.write("senha1234")
 pag.press("tab")
 pag.press("enter")
 
-time.sleep(2)
-print(pag.position())
 
+# loop de iteração da tabela e preenchimento do formulario online
 for linha in range(10): 
     pag.click(x=859, y=252)
     pag.write(tabela.loc[linha,"codigo"])
@@ -43,6 +46,8 @@ for linha in range(10):
     pag.press("tab")
     pag.write(str(tabela.loc[linha,"custo"]))
     pag.press("tab")
+
+    # verificação para campo vazio na coluna "obs"
     if pd.isna(tabela.loc[linha,"obs"]):
         pag.write("Sem observacoes")
     else:
@@ -50,5 +55,9 @@ for linha in range(10):
     pag.press("tab")
     pag.press("enter")
     
+
+# Pegar posição do mouse
+#time.sleep(2)
+#print(pag.position())
 
 
